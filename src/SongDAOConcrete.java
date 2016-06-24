@@ -138,8 +138,23 @@ public class SongDAOConcrete implements SongDaoInterface{
 
 	@Override
 	public void deleteSong(Song song) throws SQLException {
-		// TODO Auto-generated method stub
-		
+		if (song != null) {
+			// create an SELECT SQL query
+			String query = "DELETE FROM song WHERE songID = ?";
+
+			try (
+			// java.sql.Statement
+			PreparedStatement statement = connection.prepareStatement(query);) {
+
+				// fill in the place-holders/parameters
+				statement.setInt(1, song.getSongID());
+
+				// execute the query
+				statement.executeUpdate();
+
+				System.out.println("Song deleted from the database.");
+			}
+		}
 	}
 
 	@Override
