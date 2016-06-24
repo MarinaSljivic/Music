@@ -44,7 +44,6 @@ public class ConnectionManager {
 	public Connection getConnection() {
 		if (connection == null) {
 			if (openConnection()) {
-				System.out.println("Connection opened");
 				return connection;
 			} else {
 				return null;
@@ -54,8 +53,7 @@ public class ConnectionManager {
 	}
 
 	public void close() {
-		System.out.println("Closing connection");
-		try {
+try {
 			connection.close();
 			connection = null;
 		} catch (Exception e) {
