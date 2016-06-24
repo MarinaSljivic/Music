@@ -107,8 +107,15 @@ public class SongDAOConcrete implements SongDaoInterface{
 
 	@Override
 	public void printSong(Song song) {
-		// TODO Auto-generated method stub
-		
+		if (song != null) {
+			System.out.println("songID: " + song.getSongID() 
+					+ ", title: " + song.getTitle() 
+					+ ", artist: " + song.getArtist() 
+					+ ", album: " + song.getAlbum()
+					+ ", year released: " + song.getYearReleased());
+		} else {
+			System.out.println("No song to print.");
+		}	
 	}
 
 }
