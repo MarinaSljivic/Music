@@ -3,8 +3,18 @@ public class Song {
 	private String title;
 	private String artist;
 	private String album;
-	private int yearReleased;
-
+	private int year_released;
+	
+	public Song(int songID, String title, String artist, String album,
+			int year_released) {
+		super();
+		this.songID = songID;
+		this.title = title;
+		this.artist = artist;
+		this.album = album;
+		this.year_released = year_released;
+	}
+	
 	public int getSongID() {
 		return songID;
 	}
@@ -22,7 +32,7 @@ public class Song {
 	}
 
 	public int getYearReleased() {
-		return yearReleased;
+		return year_released;
 	}
 
 }
