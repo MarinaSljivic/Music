@@ -159,8 +159,43 @@ public class SongDAOConcrete implements SongDaoInterface{
 
 	@Override
 	public void addSong() throws SQLException {
-		// TODO Auto-generated method stub
 		
+		//create query to insert new values
+		String query = "INSERT INTO song(title, artist, album, year_released) VALUES (?, ?, ?, ?)";
+
+		// new Scanner
+		java.util.Scanner input = new java.util.Scanner(System.in);
+
+		System.out.print("Enter songs title: ");
+		String title = input.nextLine();
+
+		System.out.print("Enter songs artist: ");
+		String artist = input.nextLine();
+
+		System.out.print("Enter songs album: ");
+		String album = input.nextLine();
+
+		System.out.print("Enter songs year released: ");
+		int year_released = input.nextInt();
+
+		// close the scanner
+		input.close();
+		
+		try (
+		// java.sql.Statement
+		PreparedStatement statement = connection.prepareStatement(query);) {
+
+			// fill in the place-holders/parameters
+			statement.setString(1, title);
+			statement.setString(2, artist);
+			statement.setString(3, album);
+			statement.setInt(4, year_released);
+
+			// execute the query
+			statement.executeUpdate();
+
+			System.out.println("Song added to the database.");
+		}
 	}
 
 	@Override
