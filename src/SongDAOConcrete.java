@@ -1,4 +1,5 @@
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -47,8 +48,43 @@ public class SongDAOConcrete implements SongDaoInterface{
 
 	@Override
 	public Song getSong(int songID) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+
+		// null song
+		Song song = null;
+
+		// create an SELECT SQL query
+		String query = "SELECT * FROM song WHERE songID = ?";
+
+		// create a new ResultSet
+		ResultSet rs = null;
+
+		try (
+		// java.sql.Statement
+		PreparedStatement statement = connection.prepareStatement(query);) {
+
+			// fill in the placeholders/parameters
+			statement.setInt(1, songID);
+
+			// execute the query
+			rs = statement.executeQuery();
+
+			// set the cursor
+			if (rs.next()) {
+
+				// populate song
+				song = new Song(rs.getInt("songID"), 
+						rs.getString("title"), 
+						rs.getString("artist"), 
+						rs.getString("album"),
+						rs.getInt("year_released"));
+
+				// close the ResultSet
+				rs.close();
+			}
+		}
+
+		return song;
+
 	}
 
 	@Override
