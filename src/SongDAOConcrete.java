@@ -89,7 +89,50 @@ public class SongDAOConcrete implements SongDaoInterface{
 
 	@Override
 	public void updateSong(Song song) throws SQLException {
-		// TODO Auto-generated method stub
+		if (song != null) {
+
+			// create an SELECT SQL query
+			String query = "UPDATE song SET title = ?, artist = ?, album = ?, year_released = ? WHERE songID = ?";
+
+			// new Scanner
+			java.util.Scanner input = new java.util.Scanner(System.in);
+
+			System.out.print("Set a new title for song (current: "
+					+ song.getTitle() + " ): ");
+			String title = input.nextLine();
+
+			System.out.print("Set a new artist for song (current: "
+					+ song.getArtist() + " ): ");
+			String artist = input.nextLine();
+
+			System.out.print("Set a new album for song (current: "
+					+ song.getAlbum() + " ): ");
+			String album = input.nextLine();
+
+			System.out.print("Set a new year released for song (current: "
+					+ song.getYearReleased() + " ): ");
+			int year_released = input.nextInt();
+
+			// close the scanner
+			input.close();
+
+			try (
+			// java.sql.Statement
+			PreparedStatement statement = connection.prepareStatement(query);) {
+
+				// fill in the placeholders/parameters
+				statement.setString(1, title);
+				statement.setString(2, artist);
+				statement.setString(3, album);
+				statement.setInt(4, year_released);
+				statement.setInt(5, song.getSongID());
+
+				// execute the query
+				statement.executeUpdate();
+
+				System.out.println("Song updated in the database.");
+			}
+		}
 		
 	}
 
