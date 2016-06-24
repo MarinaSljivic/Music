@@ -19,7 +19,7 @@ public class SongDaoDemo {
 		songDAO.printSong(songDAO.getSong(1));
 		
 		//update song
-		songDAO.updateSong(songDAO.getSong(1));	
+		songDAO.updateSong(songDAO.getSong(3));	
 		
 		//delete song
 		songDAO.deleteSong(songDAO.getSong(1));
